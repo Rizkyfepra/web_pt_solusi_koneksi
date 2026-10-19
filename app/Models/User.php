@@ -21,13 +21,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'role',
         'password',
     ];
 
+    /** Satu-satunya admin = email yang cocok dengan ADMIN_EMAIL di config. */
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        $adminEmail = config('admin.email');
+
+        return filled($adminEmail) && $this->email === $adminEmail;
     }
 
     /**

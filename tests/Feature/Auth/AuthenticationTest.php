@@ -32,7 +32,9 @@ class AuthenticationTest extends TestCase
 
     public function test_non_admin_users_cannot_authenticate(): void
     {
-        $user = User::factory()->create(['role' => 'user']);
+        $user = User::factory()->create([
+            'email' => 'bukan-admin@example.com',
+        ]);
 
         $this->post('/login', [
             'email' => $user->email,

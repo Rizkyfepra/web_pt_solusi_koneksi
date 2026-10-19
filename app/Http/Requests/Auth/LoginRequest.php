@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        // Hanya akun admin yang boleh masuk; user biasa ditolak di login.
+        // Hanya 1 akun admin yang boleh login.
         if (! Auth::user()?->isAdmin()) {
             Auth::logout();
             RateLimiter::hit($this->throttleKey());

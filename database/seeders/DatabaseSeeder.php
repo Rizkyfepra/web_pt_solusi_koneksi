@@ -15,11 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminEmail = config('admin.email') ?: 'admin@gmail.com';
-
         User::factory()->admin()->create([
             'name' => 'Admin',
-            'email' => $adminEmail,
         ]);
 
         $this->call([

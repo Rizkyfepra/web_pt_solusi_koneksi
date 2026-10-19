@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Hanya akun dengan role admin yang boleh mengelola panel.
+        // Hanya 1 akun admin (email = config admin.email) yang boleh mengelola panel.
         Gate::define('manage-gallery', function (User $user) {
             return $user->isAdmin();
         });

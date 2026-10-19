@@ -4,11 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Admin email (seeding / referensi)
+    | Email admin (satu akun)
     |--------------------------------------------------------------------------
     |
-    | Digunakan saat seed akun admin. Akses panel dicek lewat kolom users.role,
-    | bukan email ini. Pastikan nilai ada di .env agar config:cache aman.
+    | Email ini menentukan siapa satu-satunya admin yang boleh login & akses
+    | panel. Ambil dari .env agar tetap aman setelah config:cache.
     |
     */
 
