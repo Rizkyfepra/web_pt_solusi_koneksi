@@ -11,10 +11,6 @@
     </a>
 </div>
 
-@if (session('success'))
-    <div class="bg-green-50 text-green-700 text-sm px-4 py-3 rounded-md mb-6">{{ session('success') }}</div>
-@endif
-
 <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
     <table class="w-full text-sm">
         <thead class="bg-slate-50 text-left text-slate-500">
@@ -44,13 +40,7 @@
                     </td>
                     <td class="px-6 py-4 text-slate-500">{{ Str::limit($produk->deskripsi, 60) }}</td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('admin.produk.edit', $produk) }}" class="text-blue-600 hover:underline mr-3">Edit</a>
-                        <form action="{{ route('admin.produk.destroy', $produk) }}" method="POST" class="inline"
-                              onsubmit="return confirm('Yakin mau hapus produk ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline">Hapus</button>
-                        </form>
+                        <a href="{{ route('admin.produk.edit', $produk) }}" class="text-blue-600 hover:underline">Edit</a>
                     </td>
                 </tr>
             @empty

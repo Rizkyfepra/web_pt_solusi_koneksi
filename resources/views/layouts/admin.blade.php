@@ -4,18 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'Dashboard') - Admin PT Solusi Koneksi Anda</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
+  @include('partials.tailwind-cdn')
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -38,6 +27,12 @@
       <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
         <p class="px-3 text-[11px] uppercase tracking-wider text-slate-500 mb-2">Menu Utama</p>
 
+        <a href="{{ route('admin.dashboard') }}"
+           class="block px-3 py-2.5 rounded-md text-sm transition
+                  {{ request()->routeIs('admin.dashboard') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' }}">
+          Dashboard
+        </a>
+
         <a href="{{ route('admin.profil.edit') }}"
            class="block px-3 py-2.5 rounded-md text-sm transition
                   {{ request()->routeIs('admin.profil.*') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' }}">
@@ -48,6 +43,12 @@
            class="block px-3 py-2.5 rounded-md text-sm transition
                   {{ request()->routeIs('admin.galeri.*') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' }}">
           Galeri Kegiatan
+        </a>
+
+        <a href="{{ route('admin.layanan.index') }}"
+           class="block px-3 py-2.5 rounded-md text-sm transition
+                  {{ request()->routeIs('admin.layanan.*') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' }}">
+          Layanan
         </a>
 
         <a href="{{ route('admin.produk.index') }}"
@@ -102,7 +103,7 @@
 
       {{-- Breadcrumb --}}
       <div class="px-6 py-3 text-xs text-slate-500 border-b border-slate-200 bg-white">
-        <a href="{{ route('admin.galeri.index') }}" class="hover:text-slate-700">Admin</a>
+        <a href="{{ route('admin.dashboard') }}" class="hover:text-slate-700">Admin</a>
         <span class="mx-1">/</span>
         <span class="text-slate-700 font-medium">@yield('title', 'Dashboard')</span>
       </div>

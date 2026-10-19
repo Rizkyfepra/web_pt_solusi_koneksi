@@ -48,12 +48,12 @@
     </div>
   </section>
 
-  {{-- Preview Produk / Layanan --}}
+  {{-- Preview Layanan --}}
   <section class="bg-slate-50">
     <div class="max-w-7xl mx-auto px-6 py-20">
       <div class="flex items-start justify-between mb-10 flex-wrap gap-4">
         <div>
-          <h2 class="font-serif text-3xl font-semibold text-slate-900">Layanan/Produk</h2>
+          <h2 class="font-serif text-3xl font-semibold text-slate-900">Layanan</h2>
           <p class="text-slate-500 mt-2">Solusi konektivitas dan teknologi untuk kebutuhan bisnis Anda.</p>
         </div>
         <a href="{{ route('produk.index') }}"
@@ -63,30 +63,59 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-          <img class="w-full h-48 object-cover" src="{{ asset('images/layanan-jaringan.jpg') }}" alt="Jaringan & Infrastruktur">
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-gray-800 mb-2">Jaringan & Infrastruktur</h3>
-          </div>
+        @forelse ($daftarLayanan as $layanan)
+          <a href="{{ route('produk.show', $layanan) }}"
+             class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 block">
+            <div class="h-48 bg-slate-200 overflow-hidden">
+              @if ($layanan->gambar)
+                <img class="w-full h-full object-cover" src="{{ Storage::url($layanan->gambar) }}" alt="{{ $layanan->nama }}">
+              @endif
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-lg text-gray-800 mb-2">{{ $layanan->nama }}</h3>
+              <span class="text-sm font-medium text-blue-700">Selengkapnya &rarr;</span>
+            </div>
+          </a>
+        @empty
+          <p class="text-slate-400 text-sm col-span-4">Belum ada layanan.</p>
+        @endforelse
+      </div>
+    </div>
+  </section>
+
+  {{-- Preview Produk --}}
+  <section class="bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-20">
+      <div class="flex items-start justify-between mb-10 flex-wrap gap-4">
+        <div>
+          <h2 class="font-serif text-3xl font-semibold text-slate-900">Produk</h2>
+          <p class="text-slate-500 mt-2">Paket dan penawaran siap pakai untuk kebutuhan operasional Anda.</p>
         </div>
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-          <img class="w-full h-48 object-cover" src="{{ asset('images/layanan-internet.jpg') }}" alt="Internet Dedicated">
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-gray-800 mb-2">Internet Dedicated</h3>
-          </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-          <img class="w-full h-48 object-cover" src="{{ asset('images/layanan-cloud.jpg') }}" alt="Solusi Cloud">
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-gray-800 mb-2">Solusi Cloud</h3>
-          </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-          <img class="w-full h-48 object-cover" src="{{ asset('images/layanan-it.jpg') }}" alt="Managed IT Service">
-          <div class="p-5">
-            <h3 class="font-bold text-lg text-gray-800 mb-2">Managed IT Service</h3>
-          </div>
-        </div>
+        <a href="{{ route('produk.index') }}#produk"
+           class="border border-blue-600 text-blue-600 text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-50 transition whitespace-nowrap">
+          Lihat Selengkapnya &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @forelse ($daftarProduk as $produk)
+          <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="h-48 bg-slate-200 overflow-hidden">
+              @if ($produk->gambar)
+                <img class="w-full h-full object-cover" src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}">
+              @endif
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-slate-900 mb-2">{{ $produk->nama }}</h3>
+              <p class="text-slate-500 text-sm leading-relaxed mb-3">{{ Str::limit($produk->deskripsi, 90) }}</p>
+              @if ($produk->harga)
+                <span class="text-sm font-semibold text-slate-900">Rp {{ number_format($produk->harga, 0, ',', '.') }}</span>
+              @endif
+            </div>
+          </article>
+        @empty
+          <p class="text-slate-400 text-sm col-span-3">Belum ada produk.</p>
+        @endforelse
       </div>
     </div>
   </section>

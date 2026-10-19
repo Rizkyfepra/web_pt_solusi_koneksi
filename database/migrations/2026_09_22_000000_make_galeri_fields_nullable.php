@@ -1,17 +1,19 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        // Pakai raw SQL (bukan ->nullable()->change()) supaya tidak perlu
-        // install package tambahan (doctrine/dbal).
-        DB::statement('ALTER TABLE galeri MODIFY judul VARCHAR(255) NULL');
-        DB::statement('ALTER TABLE galeri MODIFY deskripsi TEXT NULL');
-        DB::statement('ALTER TABLE galeri MODIFY kategori VARCHAR(255) NULL');
+        // Schema::change() portable untuk MySQL & SQLite (tanpa raw MODIFY).
+        Schema::table('galeri', function (Blueprint $table) {
+            $table->string('judul')->nullable()->change();
+            $table->text('deskripsi')->nullable()->change();
+            $table->string('kategori')->nullable()->change();
+        });
     }
 
     public function down(): void

@@ -11,7 +11,8 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $daftarProduk = Produk::latest()->get();
+        $daftarProduk = Produk::katalog()->latest()->get();
+
         return view('admin.produk.index', compact('daftarProduk'));
     }
 
@@ -29,6 +30,8 @@ class ProdukController extends Controller
             'gambar'    => 'nullable|image|max:9048',
         ]);
 
+        $validated['kategori'] = Produk::TIPE_PRODUK;
+
         if ($request->hasFile('gambar')) {
             $validated['gambar'] = $request->file('gambar')->store('produk', 'public');
         }
@@ -40,17 +43,23 @@ class ProdukController extends Controller
 
     public function edit(Produk $produk)
     {
+        abort_unless(! $produk->isLayanan(), 404);
+
         return view('admin.produk.edit', compact('produk'));
     }
 
     public function update(Request $request, Produk $produk)
     {
+        abort_unless(! $produk->isLayanan(), 404);
+
         $validated = $request->validate([
             'nama'      => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'harga'     => 'nullable|integer|min:0',
             'gambar'    => 'nullable|image|max:9048',
         ]);
+
+        $validated['kategori'] = Produk::TIPE_PRODUK;
 
         if ($request->hasFile('gambar')) {
             if ($produk->gambar) {
@@ -62,15 +71,5 @@ class ProdukController extends Controller
         $produk->update($validated);
 
         return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diperbarui.');
-    }
-
-    public function destroy(Produk $produk)
-    {
-        if ($produk->gambar) {
-            Storage::disk('public')->delete($produk->gambar);
-        }
-        $produk->delete();
-
-        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus.');
     }
 }
