@@ -176,9 +176,16 @@
         <article class="bg-white rounded-xl border border-slate-200 overflow-hidden">
           <div class="h-36 md:h-44 bg-slate-200 overflow-hidden">
             <?php if($galeri->gambar): ?>
-              <img src="<?php echo e(Storage::url($galeri->gambar)); ?>" class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
-                   onclick="openLightbox('<?php echo e(Storage::url($galeri->gambar)); ?>')">
+              <img src="<?php echo e(Storage::url($galeri->gambar)); ?>" alt="<?php echo e($galeri->judul ?: 'Foto kegiatan perusahaan'); ?>"
+                   class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
+                   onclick="openLightbox('<?php echo e(Storage::url($galeri->gambar)); ?>', <?php echo \Illuminate\Support\Js::from($galeri->judul ?: 'Galeri Kegiatan')->toHtml() ?>)">
             <?php endif; ?>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-sm md:text-base text-slate-900">
+              <?php echo e($galeri->judul ?: 'Galeri Kegiatan'); ?>
+
+            </h3>
           </div>
         </article>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

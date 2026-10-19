@@ -12,6 +12,7 @@ class GaleriController extends Controller
     public function index()
     {
         $daftarGaleri = Galeri::latest()->get();
+
         return view('admin.galeri.index', compact('daftarGaleri'));
     }
 
@@ -23,14 +24,17 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'gambar' => 'required|image|max:9048', 
+            'judul' => ['required', 'string', 'max:255'],
+            'gambar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:9216'],
         ]);
 
         $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
 
         Galeri::create($validated);
 
-        return redirect()->route('admin.galeri.index')->with('success', 'Foto berhasil ditambahkan.');
+        return redirect()
+            ->route('admin.galeri.index')
+            ->with('success', 'Galeri berhasil ditambahkan.');
     }
 
     public function edit(Galeri $galeri)
@@ -41,19 +45,25 @@ class GaleriController extends Controller
     public function update(Request $request, Galeri $galeri)
     {
         $validated = $request->validate([
-            'gambar' => 'nullable|image|max:9048',
+            'judul' => ['required', 'string', 'max:255'],
+            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:9216'],
         ]);
 
         if ($request->hasFile('gambar')) {
             if ($galeri->gambar) {
                 Storage::disk('public')->delete($galeri->gambar);
             }
+
             $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+        } else {
+            unset($validated['gambar']);
         }
 
         $galeri->update($validated);
 
-        return redirect()->route('admin.galeri.index')->with('success', 'Foto berhasil diperbarui.');
+        return redirect()
+            ->route('admin.galeri.index')
+            ->with('success', 'Galeri berhasil diperbarui.');
     }
 
     public function destroy(Galeri $galeri)
@@ -64,6 +74,8 @@ class GaleriController extends Controller
 
         $galeri->delete();
 
-        return redirect()->route('admin.galeri.index')->with('success', 'Foto berhasil dihapus.');
+        return redirect()
+            ->route('admin.galeri.index')
+            ->with('success', 'Galeri berhasil dihapus.');
     }
 }

@@ -11,12 +11,22 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <?php $__empty_1 = true; $__currentLoopData = $daftarGaleri; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $galeri): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-          <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
             <div class="h-56 bg-slate-200 overflow-hidden">
               <?php if($galeri->gambar): ?>
-                <img src="<?php echo e(Storage::url($galeri->gambar)); ?>" class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
-                     onclick="openLightbox('<?php echo e(Storage::url($galeri->gambar)); ?>')">
+                <img
+                  src="<?php echo e(Storage::url($galeri->gambar)); ?>"
+                  alt="<?php echo e($galeri->judul ?: 'Foto kegiatan perusahaan'); ?>"
+                  class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
+                  onclick="openLightbox('<?php echo e(Storage::url($galeri->gambar)); ?>', <?php echo \Illuminate\Support\Js::from($galeri->judul ?: 'Galeri Kegiatan')->toHtml() ?>)"
+                >
               <?php endif; ?>
+            </div>
+            <div class="p-4">
+              <h2 class="text-base md:text-lg font-semibold text-slate-900">
+                <?php echo e($galeri->judul ?: 'Galeri Kegiatan'); ?>
+
+              </h2>
             </div>
           </article>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

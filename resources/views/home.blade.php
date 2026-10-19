@@ -178,9 +178,15 @@
         <article class="bg-white rounded-xl border border-slate-200 overflow-hidden">
           <div class="h-36 md:h-44 bg-slate-200 overflow-hidden">
             @if ($galeri->gambar)
-              <img src="{{ Storage::url($galeri->gambar) }}" class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
-                   onclick="openLightbox('{{ Storage::url($galeri->gambar) }}')">
+              <img src="{{ Storage::url($galeri->gambar) }}" alt="{{ $galeri->judul ?: 'Foto kegiatan perusahaan' }}"
+                   class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
+                   onclick="openLightbox('{{ Storage::url($galeri->gambar) }}', @js($galeri->judul ?: 'Galeri Kegiatan'))">
             @endif
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-sm md:text-base text-slate-900">
+              {{ $galeri->judul ?: 'Galeri Kegiatan' }}
+            </h3>
           </div>
         </article>
       @empty

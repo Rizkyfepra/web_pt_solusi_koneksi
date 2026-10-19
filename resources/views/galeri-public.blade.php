@@ -13,12 +13,21 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @forelse ($daftarGaleri as $galeri)
-          <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
             <div class="h-56 bg-slate-200 overflow-hidden">
               @if ($galeri->gambar)
-                <img src="{{ Storage::url($galeri->gambar) }}" class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
-                     onclick="openLightbox('{{ Storage::url($galeri->gambar) }}')">
+                <img
+                  src="{{ Storage::url($galeri->gambar) }}"
+                  alt="{{ $galeri->judul ?: 'Foto kegiatan perusahaan' }}"
+                  class="w-full h-full object-cover cursor-pointer hover:opacity-80 transition"
+                  onclick="openLightbox('{{ Storage::url($galeri->gambar) }}', @js($galeri->judul ?: 'Galeri Kegiatan'))"
+                >
               @endif
+            </div>
+            <div class="p-4">
+              <h2 class="text-base md:text-lg font-semibold text-slate-900">
+                {{ $galeri->judul ?: 'Galeri Kegiatan' }}
+              </h2>
             </div>
           </article>
         @empty

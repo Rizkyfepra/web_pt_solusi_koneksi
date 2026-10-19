@@ -9,6 +9,7 @@ class Galeri extends Model
     protected $table = 'galeri';
 
     protected $fillable = [
+        'judul',
         'gambar',
     ];
 }
