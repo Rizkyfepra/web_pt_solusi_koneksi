@@ -12,9 +12,4 @@ class PageController extends Controller
 
         return view('profil', compact('profil'));
     }
-
-    public function kontak()
-    {
-        return view('kontak');
-    }
 }

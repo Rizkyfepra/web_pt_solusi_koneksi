@@ -11,7 +11,7 @@
 </div>
 
 {{-- Stats --}}
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
     <a href="{{ route('admin.layanan.index') }}"
        class="bg-white rounded-xl border border-slate-200 px-5 py-4 hover:border-blue-300 transition">
         <p class="text-xs uppercase tracking-wider text-slate-400 mb-1">Layanan</p>
@@ -31,6 +31,14 @@
        class="bg-white rounded-xl border border-slate-200 px-5 py-4 hover:border-blue-300 transition">
         <p class="text-xs uppercase tracking-wider text-slate-400 mb-1">Galeri</p>
         <p class="text-3xl font-bold text-slate-900">{{ $stats['galeri'] }}</p>
+    </a>
+    <a href="{{ route('admin.pesan.index') }}"
+       class="bg-white rounded-xl border border-slate-200 px-5 py-4 hover:border-blue-300 transition">
+        <p class="text-xs uppercase tracking-wider text-slate-400 mb-1">Pesan</p>
+        <p class="text-3xl font-bold text-slate-900">{{ $stats['pesan'] }}</p>
+        @if ($stats['pesan_baru'] > 0)
+            <p class="text-xs text-blue-600 mt-1">{{ $stats['pesan_baru'] }} belum dibaca</p>
+        @endif
     </a>
 </div>
 
@@ -77,7 +85,7 @@
     </div>
 </div>
 
-<div class="grid lg:grid-cols-2 gap-6">
+<div class="grid lg:grid-cols-3 gap-6">
     {{-- Artikel terbaru --}}
     <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
         <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
@@ -130,5 +138,33 @@
             <p class="px-5 py-8 text-center text-sm text-slate-400">Belum ada foto galeri.</p>
         @endif
     </div>
+
+    {{-- Pesan terbaru --}}
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+            <h2 class="text-sm font-semibold text-slate-900">Pesan Terbaru</h2>
+            <a href="{{ route('admin.pesan.index') }}" class="text-xs text-blue-600 hover:underline">Lihat semua</a>
+        </div>
+        <ul class="divide-y divide-slate-100">
+            @forelse ($pesanTerbaru as $pesan)
+                <li class="px-5 py-3">
+                    <a href="{{ route('admin.pesan.show', $pesan) }}" class="block group">
+                        <div class="flex items-center justify-between gap-2">
+                            <p class="text-sm font-medium text-slate-800 group-hover:text-blue-600 truncate">
+                                {{ $pesan->nama }}
+                            </p>
+                            @unless ($pesan->dibaca)
+                                <span class="text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full shrink-0">Baru</span>
+                            @endunless
+                        </div>
+                        <p class="text-xs text-slate-400 mt-0.5 truncate">{{ $pesan->subjek ?: Str::limit($pesan->pesan, 40) }}</p>
+                    </a>
+                </li>
+            @empty
+                <li class="px-5 py-8 text-center text-sm text-slate-400">Belum ada pesan.</li>
+            @endforelse
+        </ul>
+    </div>
 </div>
 @endsection
+

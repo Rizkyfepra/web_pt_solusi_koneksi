@@ -73,6 +73,9 @@
             </div>
             <div class="p-5">
               <h3 class="font-bold text-lg text-gray-800 mb-2">{{ $layanan->nama }}</h3>
+              @if ($layanan->deskripsi)
+                <p class="text-sm text-slate-500 mb-3 leading-relaxed">{{ Str::limit($layanan->deskripsi, 90) }}</p>
+              @endif
               <span class="text-sm font-medium text-blue-700">Selengkapnya &rarr;</span>
             </div>
           </a>

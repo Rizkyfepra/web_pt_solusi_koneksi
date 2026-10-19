@@ -72,4 +72,17 @@ class ProdukController extends Controller
 
         return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diperbarui.');
     }
+
+    public function destroy(Produk $produk)
+    {
+        abort_unless(! $produk->isLayanan(), 404);
+
+        if ($produk->gambar) {
+            Storage::disk('public')->delete($produk->gambar);
+        }
+
+        $produk->delete();
+
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus.');
+    }
 }

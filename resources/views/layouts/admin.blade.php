@@ -63,6 +63,18 @@
           Artikel
         </a>
 
+        <a href="{{ route('admin.pesan.index') }}"
+           class="block px-3 py-2.5 rounded-md text-sm transition
+                  {{ request()->routeIs('admin.pesan.*') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' }}">
+          Pesan Kontak
+          @php $pesanBaru = \App\Models\PesanKontak::belumDibaca()->count(); @endphp
+          @if ($pesanBaru > 0)
+            <span class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-full bg-red-500 text-white text-[10px] font-semibold">
+              {{ $pesanBaru }}
+            </span>
+          @endif
+        </a>
+
         <a href="{{ url('/') }}" target="_blank"
            class="block px-3 py-2.5 rounded-md text-sm hover:bg-slate-800 hover:text-white transition">
           Lihat Website
