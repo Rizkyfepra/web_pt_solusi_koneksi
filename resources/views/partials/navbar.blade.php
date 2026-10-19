@@ -1,8 +1,8 @@
   <header class="border-b border-slate-100 relative bg-white">
     <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
       <a href="{{ route('home') }}" class="flex items-center gap-3">
-        <img src="{{ asset('images/logo-ska.svg') }}" alt="Logo PT Solusi Koneksi Anda" class="h-9 w-9">
-        <span class="font-semibold tracking-wide text-slate-900">PT SOLUSI KONEKSI ANDA</span>
+        <img src="{{ asset('images/logo-ska.png') }}" alt="Logo PT Solusi Koneksi Anda" class="h-12 w-auto">
+        <span class="font-semibold tracking-wide text-slate-900">PT Solusi Koneksi Anda</span>
       </a>
 
       <div class="hidden md:flex items-center gap-8 text-sm text-slate-600">

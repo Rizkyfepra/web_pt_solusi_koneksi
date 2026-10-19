@@ -30,8 +30,8 @@
 
       {{-- Brand --}}
       <div class="h-16 flex items-center gap-3 px-5 border-b border-slate-800">
-        <img src="{{ asset('images/logo-ska.svg') }}" alt="Logo PT Solusi Koneksi Anda" class="h-9 w-9">
-        <span class="text-white font-semibold text-sm leading-tight">Solusi Koneksi Anda<br><span class="text-slate-400 font-normal text-xs">Admin Panel</span></span>
+        <img src="{{ asset('images/logo-ska.png') }}" alt="Logo PT Solusi Koneksi Anda" class="h-12 w-auto">
+        <span class="text-white font-semibold text-sm leading-tight">PT Solusi Koneksi Anda<br><span class="text-slate-400 font-normal text-xs">Admin Panel</span></span>
       </div>
 
       {{-- Menu --}}

@@ -5,7 +5,7 @@
 @section('content')
   <main class="flex-1">
     <div class="max-w-7xl mx-auto px-6 py-16">
-      <h1 class="font-serif text-3xl md:text-4xl font-semibold text-slate-900 mb-2">Produk / Layanan</h1>
+      <h1 class="font-serif text-3xl md:text-4xl font-semibold text-slate-900 mb-2">Layanan/Produk</h1>
       <p class="text-slate-500 mb-10">Solusi konektivitas dan teknologi untuk kebutuhan bisnis Anda.</p>
 
       <h2 class="text-xl font-semibold text-slate-900 mb-6">Layanan Utama</h2>

@@ -53,7 +53,7 @@
     <div class="max-w-7xl mx-auto px-6 py-20">
       <div class="flex items-start justify-between mb-10 flex-wrap gap-4">
         <div>
-          <h2 class="font-serif text-3xl font-semibold text-slate-900">Produk / Layanan</h2>
+          <h2 class="font-serif text-3xl font-semibold text-slate-900">Layanan/Produk</h2>
           <p class="text-slate-500 mt-2">Solusi konektivitas dan teknologi untuk kebutuhan bisnis Anda.</p>
         </div>
         <a href="{{ route('produk.index') }}"
