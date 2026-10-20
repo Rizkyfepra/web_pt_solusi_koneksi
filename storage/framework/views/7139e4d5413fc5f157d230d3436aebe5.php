@@ -2,6 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 <h1 class="text-2xl font-bold text-slate-900 mb-2">Edit Profil Perusahaan</h1>
+<p class="text-sm text-slate-500 mb-6">Profil hanya dapat diperbarui (tanpa tambah atau hapus).</p>
 
 <form action="<?php echo e(route('admin.profil.update')); ?>" method="POST" enctype="multipart/form-data"
       class="bg-white rounded-xl border border-slate-200 p-6 max-w-xl space-y-5">
