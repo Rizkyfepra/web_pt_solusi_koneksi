@@ -61,10 +61,7 @@
     <div class="bg-white rounded-xl border border-slate-200 p-5 lg:col-span-2">
         <h2 class="text-sm font-semibold text-slate-900 mb-4">Akses Cepat</h2>
         <div class="grid sm:grid-cols-2 gap-3">
-            <a href="{{ route('admin.layanan.create') }}"
-               class="px-4 py-3 rounded-md border border-slate-200 text-sm hover:bg-slate-50 transition">
-                + Tambah Layanan
-            </a>
+          
             <a href="{{ route('admin.produk.create') }}"
                class="px-4 py-3 rounded-md border border-slate-200 text-sm hover:bg-slate-50 transition">
                 + Tambah Produk

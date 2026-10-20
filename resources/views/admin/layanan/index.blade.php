@@ -5,10 +5,6 @@
 @section('content')
 <div class="flex items-center justify-between mb-6">
     <h1 class="text-2xl font-bold text-slate-900">Kelola Layanan</h1>
-    <a href="{{ route('admin.layanan.create') }}"
-       class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition">
-        + Tambah Layanan
-    </a>
 </div>
 
 <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">

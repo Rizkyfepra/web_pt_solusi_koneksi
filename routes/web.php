@@ -34,9 +34,10 @@ Route::prefix('admin')->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('galeri', GaleriController::class)->except(['show']);
-        // Layanan: tambah, edit, update (tanpa hapus)
+        
+        // Layanan: hanya index, edit, update
         Route::resource('layanan', LayananController::class)
-            ->except(['show', 'destroy'])
+            ->only(['index', 'edit', 'update'])
             ->parameters(['layanan' => 'produk']);
         Route::resource('produk', ProdukController::class)->except(['show']);
         Route::resource('artikel', ArtikelController::class)->except(['show']);
